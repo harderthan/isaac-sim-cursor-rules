@@ -1,0 +1,19 @@
+---
+description: Critical rules for handling asynchronous simulation steps and app startup in Isaac Sim.
+globs: ["**/scripts/*.py", "**/exts/**/*.py"]
+---
+
+# Isaac Sim Async & Step Rules
+
+- **NEVER** use `time.sleep()` to wait for simulation events. It freezes the Omniverse UI thread.
+- **ALWAYS** use `await omni.kit.app.get_app().next_update_async()` or `simulation_context.step_async()`.
+- **Initialization**: Always wait for one frame after loading an asset before accessing its physics properties.
+
+### Correct Pattern
+```python
+async def load_and_move(self):
+    await self.world.reset_async()
+    self.robot.set_world_pose(position=np.array([0, 0, 0]))
+    # Wait for physics to initialize
+    for _ in range(10):
+        await self.world.step_async(render=True)

@@ -1,0 +1,15 @@
+---
+description: Environment setup and Python interpreter rules for Isaac Sim.
+globs: ["**/*.py", ".vscode/settings.json", "Makefile", "*.sh"]
+---
+
+# Isaac Sim Environment Rules
+
+- **Interpreter**: NEVER use system Python or standard Conda environments.
+- **Python Execution**: Always use the bundled Python executable located at `${ISAAC_SIM_PATH}/python.sh`.
+- **Dependency Management**: Do not use `pip install` directly into the system. If extra packages are needed, use `${ISAAC_SIM_PATH}/python.sh -m pip install`.
+- **Environment Variables**: Ensure `LD_LIBRARY_PATH` and `PATH` include the Isaac Sim root directory to prevent library loading errors (libpython3.x.so).
+
+### Recommended Terminal Commands
+- **Running a script**: `./python.sh path/to/script.py`
+- **Installing a package**: `./python.sh -m pip install [package_name]`

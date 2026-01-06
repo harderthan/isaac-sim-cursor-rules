@@ -1,0 +1,13 @@
+---
+description: Enforce coordinate systems and unit conventions for Isaac Sim assets and math.
+globs: ["**/*.py"]
+---
+
+# Coordinate & Unit Conventions
+
+- **Units**: Default to **Meters (m)**. Check `UsdGeom.GetStageMetersPerUnit(stage)` if values seem off.
+- **Coordinate System**: Isaac Sim uses **Z-up** by default. Ensure all vector operations (Gf.Vec3d) follow this.
+- **Orientation**: Use `Quaternions` in `[w, x, y, z]` format (standard for omni.isaac.core), NOT `[x, y, z, w]` (standard for ROS).
+
+### Math Best Practice
+- Use `omni.isaac.core.utils.rotations` for Euler-to-Quat conversions to ensure compatibility with the Isaac Sim backend.

@@ -1,0 +1,10 @@
+---
+description: UI Development rules using omni.ui for Isaac Sim Extensions.
+globs: ["**/ui/*.py", "**/exts/**/window.py"]
+---
+
+# UI & Layout Rules
+
+- **Context Manager**: Use `with ui.VStack():` or `with ui.ScrollingFrame():` to define layouts.
+- **Model Binding**: Always bind UI fields to a `ui.SimpleStringModel` or similar for reactive updates.
+- **Cleanup**: In `on_shutdown()`, explicitly set UI elements to `None` to prevent memory leaks in the Omniverse viewport.
